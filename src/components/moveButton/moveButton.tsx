@@ -9,6 +9,7 @@ interface Icons {
   moveDown: string;
   moveLeft: string;
   moveRight: string;
+  rotate: string;
 }
 
 export function MoveButton(props: Props) {
@@ -17,6 +18,7 @@ export function MoveButton(props: Props) {
     moveDown: '⬇',
     moveLeft: '⬅',
     moveRight: '➡',
+    rotate: '🔄',
   };
 
   return (

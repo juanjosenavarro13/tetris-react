@@ -6,10 +6,16 @@ import { movePiece } from './utils';
 
 function App() {
   const [board, setBoard] = useState(INITIAL_BOARD);
+  const [rotatePiece, setRotatePiece] = useState<number>(0);
 
   const handleMove = (move: keyof typeof VALID_MOVES) => {
-    const newBoard = movePiece(board, move);
+    const { board: newBoard, rotatePiece: newRotatePiece } = movePiece(
+      board,
+      move,
+      rotatePiece,
+    );
     setBoard(newBoard);
+    setRotatePiece(newRotatePiece);
   };
 
   return (

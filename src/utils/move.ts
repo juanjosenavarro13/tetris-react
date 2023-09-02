@@ -3,29 +3,63 @@ import { VALID_MOVES, CLEAR_BOARD } from '../constants';
 export function movePiece(
   board: string[][],
   direction: keyof typeof VALID_MOVES,
-): string[][] {
-  const moveX = VALID_MOVES[direction].x;
-  const moveY = VALID_MOVES[direction].y;
-
-  const newBoard = JSON.parse(JSON.stringify(CLEAR_BOARD));
+  rotatePiece: number,
+): { board: string[][]; rotatePiece: number } {
+  const newBoard: string[][] = JSON.parse(JSON.stringify(CLEAR_BOARD));
 
   let validMove = true;
+  let rotateItem = 0;
 
   for (let indexY = 0; indexY < board.length; indexY++) {
     for (let indexX = 0; indexX < board[indexY].length; indexX++) {
       if (board[indexY][indexX] === '⬛') {
+        const { moveX, moveY } = getNewIndex(
+          direction,
+          rotateItem,
+          rotatePiece,
+        );
+
         const newIndexY = indexY + moveY;
         const newIndexX = indexX + moveX;
 
         if (!isValidMove(newIndexY, newIndexX, newBoard)) validMove = false;
+
+        rotateItem = getNewRotate(rotateItem);
 
         newBoard[newIndexY][newIndexX] = '⬛';
       }
     }
   }
 
-  if (validMove) return newBoard;
-  return board;
+  if (validMove)
+    return { board: newBoard, rotatePiece: getNewRotate(rotatePiece) };
+  return { board, rotatePiece };
+}
+
+function getNewRotate(rotate: number) {
+  if (rotate === 3) {
+    return 0;
+  }
+  return ++rotate;
+}
+
+function getNewIndex(
+  direction: keyof typeof VALID_MOVES,
+  rotateItem: number,
+  rotatePiece: number,
+): {
+  moveX: number;
+  moveY: number;
+} {
+  if (direction !== 'rotate') {
+    return { moveX: VALID_MOVES[direction].x, moveY: VALID_MOVES[direction].y };
+  } else {
+    console.log(direction, rotatePiece);
+    return {
+      moveX: VALID_MOVES[direction][rotatePiece][rotateItem].x,
+      moveY: VALID_MOVES[direction][rotatePiece][rotateItem].y,
+    };
+  }
 }
 
 function isValidMove(y: number, x: number, board: string[][]): boolean {

@@ -7,4 +7,5 @@ export interface ValidMoves {
   moveDown: Coordinates;
   moveLeft: Coordinates;
   moveRight: Coordinates;
+  rotate: Coordinates[][];
 }

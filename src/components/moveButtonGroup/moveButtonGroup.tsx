@@ -27,6 +27,12 @@ export function MoveButtonGroup(props: Props) {
           handleMove(direction);
         }}
       />
+      <MoveButton
+        direction="rotate"
+        onClickButton={(direction) => {
+          handleMove(direction);
+        }}
+      />
     </>
   );
 }
