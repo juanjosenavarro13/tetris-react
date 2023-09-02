@@ -1,4 +1,4 @@
-import { ValidMoves } from '../types/coordinates';
+import { ValidMoves } from '../types';
 
 export const VALID_MOVES: ValidMoves = {
   moveDown: { x: 0, y: +1 },

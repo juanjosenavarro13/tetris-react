@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import './App.css';
-import { INITIAL_BOARD } from './constants/initialBoard';
-import { VALID_MOVES } from './constants/validMoves';
-import { movePiece } from './utils/move';
 import { MoveButtonGroup, TableBoard } from './components';
+import { INITIAL_BOARD, VALID_MOVES } from './constants';
+import { movePiece } from './utils';
 
 function App() {
   const [board, setBoard] = useState(INITIAL_BOARD);
